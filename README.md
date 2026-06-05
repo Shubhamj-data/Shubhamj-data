@@ -1,226 +1,201 @@
 <div align="center">
-
-<!-- HEADER BANNER -->
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0f0c29,50:302b63,100:24243e&height=200&section=header&text=Shubham%20Jadhao&fontSize=52&fontColor=ffffff&fontAlignY=38&desc=AI%20Engineer%20%7C%20Data%20Scientist&descSize=20&descAlignY=58&descColor=a78bfa&animation=fadeIn"/>
-
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:0a0a0a,100:111111&height=1&section=header"/>
 </div>
+
+<br/>
 
 <div align="center">
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&pause=1000&color=A78BFA&center=true&vCenter=true&width=600&lines=Building+Intelligent+Systems+%F0%9F%A4%96;RAG+Pipelines+%7C+LangChain+%7C+Agentic+AI;Fraud+Detection+%7C+MLOps+%7C+GenAI;From+Data+to+Deployment+%F0%9F%9A%80)](https://git.io/typing-svg)
+# Shubham Jadhao
+### AI Engineer · GenAI Systems · MLOps · Fraud Detection
+
+[![Email](https://img.shields.io/badge/-shubhamjadhao.v@gmail.com-000000?style=flat-square&logo=gmail&logoColor=white)](mailto:shubhamjadhao.v@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-000000?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/shubhamjadhao)
+[![Location](https://img.shields.io/badge/-Nagpur,_India-000000?style=flat-square&logo=googlemaps&logoColor=white)](#)
+[![Phone](https://img.shields.io/badge/-+91_7447279737-000000?style=flat-square&logo=phone&logoColor=white)](tel:+917447279737)
 
 </div>
 
+<br/>
+
 ---
 
-## 🧠 About Me
+<br/>
 
-```python
-shubham = {
-    "role"       : "AI Engineer @ HisanLabs Pvt Ltd",
-    "location"   : "Nagpur, Maharashtra, India 🇮🇳",
-    "focus"      : ["GenAI", "RAG Pipelines", "MLOps", "Fraud Detection"],
-    "experience" : "Full ML/GenAI lifecycle — data → training → deploy → monitor",
-    "currently"  : "Building LLM-powered enterprise tools",
-    "fun_fact"   : "Ex-recruiter who built an AI recruiter to replace his old job 😄"
-}
+> **I build AI systems that go into production.**
+> From a 5M-record fraud detection pipeline that retrains itself weekly, to an agentic RAG system deployed on Hugging Face — I own the full lifecycle: data → model → API → monitoring.
+
+<br/>
+
+---
+
+<br/>
+
+## What I'm building right now
+
+| Project | What it does | Stack |
+|---------|-------------|-------|
+| 🔍 **[KnowledgeOS](https://github.com/shubhamjadhao)** | Agentic RAG — employees query internal docs in plain English and get cited, confident answers | LangChain · ChromaDB · BM25 · Mistral 7B · Gemini · FastAPI |
+| 🧠 **[TalentIQ](https://github.com/shubhamjadhao)** | HR intelligence platform — attrition prediction, semantic resume matching, bias-blind screening | XGBoost · SHAP · FAISS · sentence-transformers · LangChain |
+
+<br/>
+
+---
+
+<br/>
+
+## KnowledgeOS — Agentic RAG System
+
+The problem: employees waste hours ctrl+F-ing through docs. KnowledgeOS lets them ask questions in plain English and get answers with citations back to the exact document, page, and section.
+
+**How it works under the hood:**
+
+```
+User question
+     │
+     ▼
+Question classifier ──► selects retrieval strategy
+     │
+     ▼
+Hybrid retrieval: ChromaDB (semantic) + BM25 (keyword)
+     │
+     ▼
+Reciprocal Rank Fusion → Cross-encoder reranking
+     │
+     ▼
+Confidence check ──► low confidence? → reformat + retry
+     │
+     ▼
+Answer with citations [document · page · section]
+     │
+     ▼
+SQLite memory → supports natural follow-up questions
 ```
 
-> 💡 *AI Engineer with hands-on experience building fraud detection systems, agentic RAG pipelines, and 5M+ record data infrastructure. Two full-cycle GenAI portfolio projects deployed on Hugging Face Spaces.*
+**What makes it different:**
+- Hybrid retrieval beats single-mode on exact phrases and proper nouns — RRF + cross-encoder reranking
+- Supports PDF, DOCX, PPTX, XLSX, TXT — auto-chunked (512 tokens) with full metadata tagging
+- Mistral 7B local (Ollama) with Gemini API as automatic cloud fallback
+- Analytics dashboard surfaces knowledge gaps — queries the system couldn't answer
+
+[![View Project](https://img.shields.io/badge/View_on_GitHub-000000?style=flat-square&logo=github&logoColor=white)](https://github.com/shubhamjadhao)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-HuggingFace-FFD21E?style=flat-square&logo=huggingface&logoColor=black)](https://huggingface.co)
+
+<br/>
 
 ---
 
-## 🚀 Featured Projects
+<br/>
 
-### 🔷 [KnowledgeOS — Agentic RAG System](https://github.com/shubhamjadhao)
+## TalentIQ — HR Intelligence Suite
 
-> *Ask your internal docs anything — in plain English.*
+Two modules built to replace the exact job I used to do as a technical recruiter.
 
-<table>
-<tr>
-<td width="60%">
+**Module 1 — Attrition Prediction**
+- 5 models compete in a live leaderboard: LR, Decision Tree, RF, XGBoost, Neural Net
+- Best model auto-selects using weighted AUC + F1 + Recall score
+- SHAP explainability shows HR managers *which factor* drives each employee's risk
+- What-if simulator: "What if we increase salary by 15% and remove overtime?"
 
-**What it does:**
-- 🤖 Automatically classifies questions and selects the right retrieval tool
-- 🔍 Hybrid search: ChromaDB (semantic) + BM25 (keyword) with **Reciprocal Rank Fusion**
-- 📄 Supports PDF, DOCX, PPTX, XLSX, TXT — smart 512-token chunking with full metadata
-- 💬 SQLite conversation memory for natural follow-ups
-- 📊 Analytics dashboard exposing knowledge gaps
-- ☁️ Mistral 7B (local via Ollama) + Gemini API fallback
+**Module 2 — Semantic Hiring**
+- Resume ↔ JD matching via sentence-transformers + FAISS — finds candidates keyword-ATS systems miss
+- Gap-aware interview questions: generated specifically for *missing* skills, not a generic list
+- Bias-blind mode: strips name, pronouns, graduation year before any model inference
 
-</td>
-<td width="40%" align="center">
+[![View Project](https://img.shields.io/badge/View_on_GitHub-000000?style=flat-square&logo=github&logoColor=white)](https://github.com/shubhamjadhao)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-HuggingFace-FFD21E?style=flat-square&logo=huggingface&logoColor=black)](https://huggingface.co)
 
-**Stack**
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=chainlink&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
-![ChromaDB](https://img.shields.io/badge/ChromaDB-FF6B35?style=for-the-badge&logoColor=white)
-![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
-
-</td>
-</tr>
-</table>
+<br/>
 
 ---
 
-### 🔷 [TalentIQ — HR Intelligence Suite](https://github.com/shubhamjadhao)
+<br/>
 
-> *End-to-end AI-powered HR platform: predict attrition, match resumes, generate interviews.*
+## Professional experience
 
-<table>
-<tr>
-<td width="60%">
+### AI Engineer — HisanLabs Pvt Ltd *(July 2025 – Present)*
 
-**What it does:**
-- 🏆 5 ML models in a **live leaderboard** — best model auto-selects using weighted AUC/F1/Recall
-- 🔬 **SHAP explainability** + what-if salary/overtime simulator for HR managers
-- 📝 Semantic resume ↔ JD matching via sentence-transformers + FAISS (beats keyword ATS)
-- ❓ Gap-aware interview question generator — targets missing skills, not generic prompts
-- 🙈 Bias-blind mode: strips names, pronouns, graduation year before model inference
+End-to-end fraud detection system built from scratch:
 
-</td>
-<td width="40%" align="center">
+- **Model layer:** SMOTE for class imbalance → XGBoost, Random Forest, LR, Decision Tree tuned for Recall and ROC-AUC
+- **Data layer:** Full pipeline — ingestion → validation → dual-write to MySQL + MongoDB on AWS with null/outlier/bad-record tests, 5M+ records
+- **Automation:** Weekly retraining pipeline runs without human involvement
+- **Observability:** Power BI dashboards for fraud trends, model performance, and predictions for the business team
 
-**Stack**
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-FF6600?style=for-the-badge&logoColor=white)
-![SHAP](https://img.shields.io/badge/SHAP-8B5CF6?style=for-the-badge&logoColor=white)
-![FAISS](https://img.shields.io/badge/FAISS-0055A4?style=for-the-badge&logoColor=white)
-![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=chainlink&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-
-</td>
-</tr>
-</table>
+<br/>
 
 ---
 
-## 💼 Professional Experience
+<br/>
 
-### 🏢 AI Engineer — HisanLabs Pvt Ltd *(July 2025 – Present)*
+## Technical skills
 
-| Area | What I Built |
-|------|-------------|
-| 🚨 Fraud Detection | End-to-end pipeline: SMOTE → XGBoost/RF/LR/DT, tuned for Recall & ROC-AUC |
-| 🗄️ Data Pipeline | Ingestion → Validation → MySQL + MongoDB on AWS (null, outlier, bad record tests) |
-| 🔁 AutoML | Weekly automated model retraining — zero human intervention |
-| 📊 BI Dashboard | Power BI dashboards for fraud trends, model performance, and predictions |
-| 📦 Scale | 5M+ records with equal prediction quality guarantees |
+```
+GenAI & LLMs        LangChain · OpenAI API · Hugging Face · Ollama · Gemini API
+                    RAG · Agentic RAG · Hybrid Retrieval · Prompt Engineering
 
----
+Vector Databases    ChromaDB · FAISS · Pinecone · Weaviate · BM25 · RRF
 
-## 🛠️ Tech Stack
+Machine Learning    XGBoost · LightGBM · Scikit-learn · SMOTE · SHAP
+                    Hyperparameter Tuning · Cross-Validation · Feature Engineering
 
-<details>
-<summary><b>🤖 AI / LLM / GenAI</b></summary>
-<br>
+Deep Learning       TensorFlow · Keras · PyTorch (fundamentals) · ANN · CNN · RNN
 
-![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square&logo=chainlink&logoColor=white)
-![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white)
-![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=flat-square&logo=huggingface&logoColor=black)
-![Ollama](https://img.shields.io/badge/Ollama-000000?style=flat-square&logoColor=white)
-![Gemini](https://img.shields.io/badge/Gemini_API-4285F4?style=flat-square&logo=google&logoColor=white)
+MLOps               FastAPI · Flask · Streamlit · Automated Retraining Pipelines
+                    HuggingFace Spaces · REST APIs
 
-`RAG Pipelines` · `Agentic RAG` · `Hybrid Retrieval` · `Prompt Engineering` · `GenAI Product Development`
-</details>
+Cloud & Databases   AWS (S3, EC2, RDS) · MySQL · MongoDB · SQLite
 
-<details>
-<summary><b>🗃️ Vector Databases</b></summary>
-<br>
+Computer Vision     OpenCV · YOLOv5/v8 · Image Classification · Object Detection
 
-![ChromaDB](https://img.shields.io/badge/ChromaDB-FF6B35?style=flat-square)
-![FAISS](https://img.shields.io/badge/FAISS-0055A4?style=flat-square)
-![Pinecone](https://img.shields.io/badge/Pinecone-000000?style=flat-square)
-![Weaviate](https://img.shields.io/badge/Weaviate-FF6D5A?style=flat-square)
+Analytics           Power BI · DAX · Matplotlib · Seaborn · EDA · Hypothesis Testing
 
-`BM25` · `Reciprocal Rank Fusion` · `Semantic Search`
-</details>
+Languages           Python · SQL
+```
 
-<details>
-<summary><b>⚙️ Machine Learning</b></summary>
-<br>
-
-![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-FF6600?style=flat-square)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
-
-`SMOTE` · `SHAP Explainability` · `Hyperparameter Tuning` · `Cross-Validation` · `Feature Engineering`
-</details>
-
-<details>
-<summary><b>🚀 MLOps & Deployment</b></summary>
-<br>
-
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
-
-`Automated Retraining Pipelines` · `REST APIs` · `HuggingFace Spaces`
-</details>
-
-<details>
-<summary><b>📊 Analytics & Visualization</b></summary>
-<br>
-
-![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat-square)
-![Seaborn](https://img.shields.io/badge/Seaborn-3776AB?style=flat-square)
-
-`DAX` · `EDA` · `Statistical Analysis` · `Hypothesis Testing` · `Outlier Detection`
-</details>
+<br/>
 
 ---
 
-## 📊 GitHub Stats
+<br/>
+
+## GitHub activity
 
 <div align="center">
 
-<img height="160" src="https://github-readme-stats.vercel.app/api?username=shubhamjadhao&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=a78bfa&icon_color=a78bfa&text_color=ffffff" />
-<img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=shubhamjadhao&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=a78bfa&text_color=ffffff" />
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=shubhamjadhao&show_icons=true&theme=github_dark&hide_border=true&bg_color=00000000&title_color=ffffff&icon_color=ffffff&text_color=999999&hide_title=true)
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=shubhamjadhao&layout=compact&theme=github_dark&hide_border=true&bg_color=00000000&title_color=ffffff&text_color=999999)
 
 </div>
 
-<div align="center">
-
-[![GitHub Streak](https://streak-stats.demolab.com?user=shubhamjadhao&theme=tokyonight&hide_border=true&background=0d1117&stroke=a78bfa&ring=a78bfa&fire=ff6b6b&currStreakLabel=a78bfa)](https://git.io/streak-stats)
-
-</div>
+<br/>
 
 ---
 
-## 🎓 Education
+<br/>
 
-| Degree | Institution | Year |
-|--------|-------------|------|
-| 🎓 MCA (Master of Computer Applications) | Savitribai Phule Pune University (SPPU) | 2021 – 2023 |
-| 🎓 B.Com + Computer Application | RTMNU Nagpur | 2017 – 2020 |
+## Education
 
----
+**Master of Computer Applications (MCA)** — Savitribai Phule Pune University *(2021–2023)*
 
-## 📬 Let's Connect
+**B.Com + Computer Application** — Rashtrasant Tukadoji Maharaj Nagpur University *(2017–2020)*
 
-<div align="center">
-
-[![Email](https://img.shields.io/badge/Gmail-shubhamjadhao.v%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:shubhamjadhao.v@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/shubhamjadhao)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shubhamjadhao)
-[![Phone](https://img.shields.io/badge/Phone-%2B91--7447279737-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](tel:+917447279737)
-
-</div>
+<br/>
 
 ---
 
+<br/>
+
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:24243e,50:302b63,100:0f0c29&height=120&section=footer&animation=fadeIn"/>
+### Open to AI Engineer / ML Engineer roles
 
-*⭐️ If you find my work interesting, consider giving a star to my repos!*
+**If you're building something with LLMs, RAG, or production ML — let's talk.**
+
+[![Email me](https://img.shields.io/badge/Email_me-shubhamjadhao.v@gmail.com-000000?style=for-the-badge&logo=gmail&logoColor=white)](mailto:shubhamjadhao.v@gmail.com)
+[![Connect on LinkedIn](https://img.shields.io/badge/Connect_on_LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/shubhamjadhao)
 
 </div>
+
+<br/>
